@@ -35,10 +35,16 @@ header h2 {
     margin-left: auto;
     margin-right: auto;
 }
+
+.startBtn button:hover {
+    font-style: italic;
+}
+
 #start {
     background-color: var(--main-color);
     /* color: white; */
     font-size: 40px;
+    font-weight: bold;
     padding: 30px 60px;
     border-radius: 15px;
     border:none;

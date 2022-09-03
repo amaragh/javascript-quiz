@@ -1,3 +1,8 @@
+var startBtnEl = document.querySelector(".startBtn");
+
+var timerEl = document.querySelector(".timer");
+console.log(timerEl);
+
 var questionContainerEl = document.querySelector(".questions");
 
 var questionEl = document.createElement("h2");
@@ -42,3 +47,22 @@ var questions = [
         answer:"var"
     }
 ];
+
+// var timeCounter = 60;
+
+var reduceTime = function() {
+    var timeCounter = 60;
+
+    var countdownInterval = setInterval(function() {
+        if (timeCounter > 0) {
+        timerEl.textContent = "Time Left: " + timeCounter;
+        timeCounter--;
+        }
+        else {
+            clearInterval(countdownInterval);
+
+        }
+    },1000);
+}
+
+// startBtnEl.addEventListener("click", reduceTime());
