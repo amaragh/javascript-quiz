@@ -11,20 +11,28 @@
 
 <body>
 
-
     <header>
         <h1>JavaScript Timed Quiz</h1>
         <h2>Are you up for the challenge?</h2>
         <h2>Click the 'Start Quiz' button to begin!</h2>
-        
+
     </header>
 
     <div class="startBtn">
         <button id="start">Start Quiz</button>
     </div>
 
-    <div class="timer" style="display: ;" ></div>
-    <div class="questions"></div>
+    <div class="timer" style="display: none;"></div>
+
+    <div class="questions">
+        <h2 class="question"></h2>
+        <ul class="choices">
+            <li class="choice choice1"><span class="emoji"></span></li>
+            <li class="choice choice2"><span class="emoji"></span></li>
+            <li class="choice choice3"><span class="emoji"></span></li>
+            <li class="choice choice4"><span class="emoji"></span></li>
+        </ul>
+    </div>
 
     <footer>
         <a href="#">View Highscores</a>
