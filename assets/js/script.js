@@ -54,28 +54,41 @@ var reduceTime = function () {
 var askQuestions = function () {
 
     for (var i = 0; i < questions.length; i++) {
+
+        var answerEl = questions[i].answer;
         questionEl.textContent = questions[i].question;
         choice1El.textContent = questions[i].choice1;
         choice2El.textContent = questions[i].choice2;
         choice3El.textContent = questions[i].choice3;
         choice4El.textContent = questions[i].choice4;
-        console.log(questionEl);
 
-        choiceContainerEl.addEventListener("click", responseHandler(event,choiceContainerEl));
+        console.log(questionEl);
+        console.log(choiceContainerEl);
+
         
         return questionContainerEl;
+
     }
 
 };
 
-var responseHandler = function(event, currentQuestion) {
-    var currentChoice = event.target;
-    var responseEmoji = document.querySelector(".emoji");
-    if (currentQuestion.currentChoice === currentQuestion.answer) {
-        responseEmoji.textContent = "CORRECT! ✅"
+
+
+var responseHandler = function(event) {
+    var targetEl = event.target;
+
+    if (targetEl.matches(".choice")) {
+        console.log(targetEl);
     }
 
+    // var responseEmoji = document.querySelector(".emoji");
+    // if (currentQuestion.currentChoice === currentQuestion.answer) {
+    //     responseEmoji.textContent = "CORRECT! ✅"
+    // }
+
 }
+
+choiceContainerEl.addEventListener("click", responseHandler);
 
 var startQuiz = function () {
     //  hide header
