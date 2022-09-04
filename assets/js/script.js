@@ -15,6 +15,8 @@ var choice2El = document.querySelector(".choice2");
 var choice3El = document.querySelector(".choice3");
 var choice4El = document.querySelector(".choice4");
 
+var choicesArray = [choice1El, choice2El, choice3El, choice4El];
+
 
 var questions = [
     {
@@ -55,7 +57,7 @@ var askQuestions = function () {
 
     for (var i = 0; i < questions.length; i++) {
 
-        var answerEl = questions[i].answer;
+        var answer = questions[i].answer;
         questionEl.textContent = questions[i].question;
         choice1El.textContent = questions[i].choice1;
         choice2El.textContent = questions[i].choice2;
@@ -65,20 +67,30 @@ var askQuestions = function () {
         console.log(questionEl);
         console.log(choiceContainerEl);
 
-        
+
+        for (var x = 0; x < choicesArray.length; x++) {
+
+            if (choicesArray[x].textContent === answer) {
+                choicesArray[x].setAttribute("data-correct", "yes");
+            }
+            else {
+                choicesArray[x].setAttribute("data-correct", "no");
+            }
+
+        }
+        console.log(choicesArray);
         return questionContainerEl;
-
     }
-
 };
 
 
 
-var responseHandler = function(event) {
+var responseHandler = function (event) {
     var targetEl = event.target;
 
     if (targetEl.matches(".choice")) {
         console.log(targetEl);
+
     }
 
     // var responseEmoji = document.querySelector(".emoji");
