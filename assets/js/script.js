@@ -17,6 +17,7 @@ var choice4El = document.querySelector(".choice4");
 
 var choicesArray = [choice1El, choice2El, choice3El, choice4El];
 
+var responseEmoji = document.querySelector(".emoji");
 
 var questions = [
     {
@@ -37,10 +38,11 @@ var questions = [
     }
 ];
 
-// var timeCounter = 60;
+
+var timeCounter = 60;
 
 var reduceTime = function () {
-    var timeCounter = 60;
+
 
     var countdownInterval = setInterval(function () {
         if (timeCounter > 0) {
@@ -53,9 +55,15 @@ var reduceTime = function () {
     }, 1000);
 }
 
-var askQuestions = function () {
+var questionIndex = 0;
 
-    for (var i = 0; i < questions.length; i++) {
+var askQuestions = function (i) {
+
+    var i = questionIndex;
+
+    while (i < questions.length) {
+
+        // for (var i = 0; i < questions.length; i++) {
 
         var answer = questions[i].answer;
         questionEl.textContent = questions[i].question;
@@ -78,9 +86,11 @@ var askQuestions = function () {
             }
 
         }
-        console.log(choicesArray);
+
         return questionContainerEl;
+
     }
+
 };
 
 
@@ -91,13 +101,18 @@ var responseHandler = function (event) {
     if (targetEl.matches(".choice")) {
         console.log(targetEl);
 
+        if (targetEl.getAttribute("data-correct") === "yes") {
+            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>CORRECT! ✅</span>";
+        }
+        else {
+            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>WRONG! ❌</span>";
+            timeCounter = timeCounter - 5;
+        }
     }
 
-    // var responseEmoji = document.querySelector(".emoji");
-    // if (currentQuestion.currentChoice === currentQuestion.answer) {
-    //     responseEmoji.textContent = "CORRECT! ✅"
-    // }
-
+    questionIndex++;
+    console.log(questionIndex);
+    askQuestions(questionIndex);
 }
 
 choiceContainerEl.addEventListener("click", responseHandler);
