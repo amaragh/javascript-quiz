@@ -19,6 +19,8 @@ var choicesArray = [choice1El, choice2El, choice3El, choice4El];
 
 var responseEmoji = document.querySelector(".emoji");
 
+var nextBtnEl = document.querySelector(".nextBtn");
+
 var questions = [
     {
         question: "Which of the below methods performs an action for each element in an array?",
@@ -43,7 +45,6 @@ var timeCounter = 60;
 
 var reduceTime = function () {
 
-
     var countdownInterval = setInterval(function () {
         if (timeCounter > 0) {
             timerEl.textContent = "Time Left: " + timeCounter;
@@ -61,35 +62,34 @@ var askQuestions = function (i) {
 
     var i = questionIndex;
 
-    while (i < questions.length) {
 
-        // for (var i = 0; i < questions.length; i++) {
+        while (i < questions.length) {
 
-        var answer = questions[i].answer;
-        questionEl.textContent = questions[i].question;
-        choice1El.textContent = questions[i].choice1;
-        choice2El.textContent = questions[i].choice2;
-        choice3El.textContent = questions[i].choice3;
-        choice4El.textContent = questions[i].choice4;
+            // for (var i = 0; i < questions.length; i++) {
 
-        console.log(questionEl);
-        console.log(choiceContainerEl);
+            var answer = questions[i].answer;
+            questionEl.textContent = questions[i].question;
+            choice1El.textContent = questions[i].choice1;
+            choice2El.textContent = questions[i].choice2;
+            choice3El.textContent = questions[i].choice3;
+            choice4El.textContent = questions[i].choice4;
 
+            for (var x = 0; x < choicesArray.length; x++) {
 
-        for (var x = 0; x < choicesArray.length; x++) {
-
-            if (choicesArray[x].textContent === answer) {
-                choicesArray[x].setAttribute("data-correct", "yes");
+                if (choicesArray[x].textContent === answer) {
+                    choicesArray[x].setAttribute("data-correct", "yes");
+                }
+                else {
+                    choicesArray[x].setAttribute("data-correct", "no");
+                }
             }
-            else {
-                choicesArray[x].setAttribute("data-correct", "no");
-            }
-
+            return questionContainerEl;
         }
+    
 
-        return questionContainerEl;
+ 
 
-    }
+
 
 };
 
@@ -102,20 +102,33 @@ var responseHandler = function (event) {
         console.log(targetEl);
 
         if (targetEl.getAttribute("data-correct") === "yes") {
-            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>CORRECT! ✅</span>";
+            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>CORRECT ✅</span>";
         }
         else {
-            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>WRONG! ❌</span>";
+            targetEl.innerHTML = targetEl.textContent + "<span class=emoji>WRONG ❌</span>";
             timeCounter = timeCounter - 5;
         }
     }
 
-    questionIndex++;
-    console.log(questionIndex);
-    askQuestions(questionIndex);
-}
+    // introduce option to go to next question after an answer has been selected
+    nextBtnEl.setAttribute("style", "display:'';")
+
+};
 
 choiceContainerEl.addEventListener("click", responseHandler);
+
+nextBtnEl.addEventListener("click", function () {
+    questionIndex++;
+    askQuestions(questionIndex);
+
+    if (questionIndex===questions.length) {
+        console.log("All questions have been exhausted");
+    }
+});
+
+var collectHighScore = function() {
+
+};
 
 var startQuiz = function () {
     //  hide header
@@ -126,10 +139,8 @@ var startQuiz = function () {
     timerEl.setAttribute("style", "display:'';")
     reduceTime();
 
-    askQuestions();
-
     // iterate through the questions by calling the askQuestions function
-
+    askQuestions();
 
 };
 
