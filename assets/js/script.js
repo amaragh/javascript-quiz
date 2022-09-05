@@ -76,6 +76,7 @@ var stopTimer = function () {
 questionIndex = 0;
 
 var askQuestions = function (i) {
+    
 
     i = questionIndex;
 
@@ -153,6 +154,11 @@ var highScoreHandler = function (event) {
     event.preventDefault();
 
     var initials = document.querySelector("input[name='initials']").value;
+    if (!initials) {
+        alert("Please enter your initials!");
+        return false;
+    }
+
     var currentScore = { "initials": initials, "score": saveInitialsEl.getAttribute("data-score") };
     highScores = loadScores();
     highScores.push(currentScore)
@@ -166,6 +172,7 @@ var saveScores = function () {
     localStorage.setItem("highScores", JSON.stringify(highScores));
 };
 
+// retrieve scores from local storage
 var loadScores = function () {
     var savedHighScores = localStorage.getItem("highScores");
 
@@ -173,8 +180,12 @@ var loadScores = function () {
         savedHighScores = [];
     } else {
         savedHighScores = JSON.parse(savedHighScores);
-
     }
+
+    // sort scores from highest to lowest
+    savedHighScores = savedHighScores.sort(function(a, b) {
+        return b.score - a.score;
+    })
 
     return savedHighScores
 };
@@ -219,6 +230,7 @@ var startQuiz = function () {
     timerEl.setAttribute("style", "display:'';")
     reduceTime();
     // iterate through the questions by calling the askQuestions function
+    questionContainerEl.setAttribute("style", "display:'';")
     askQuestions();
 
 };

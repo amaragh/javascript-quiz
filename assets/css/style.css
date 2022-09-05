@@ -1,6 +1,6 @@
 :root {
     --main-color: darkcyan;
-} 
+}
 
 * {
     box-sizing: border-box;
@@ -47,6 +47,70 @@ header h2 {
     font-weight: bold;
     padding: 30px 60px;
     border-radius: 15px;
-    border:none;
+    border: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.timer {
+    text-align: center;
+    padding: 50px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.questions {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 50px;
+    /* border: black solid; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+
+}
+
+.question {
+    color: var(--main-color);
+    padding-bottom: 10px;
+}
+
+.choices {
+    list-style: none;
+}
+
+.choice {
+    font-size: 20px;
+    padding: 7px;
+}
+
+.choice:hover {
+    font-size: 120%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.emoji {
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.nextBtn {
+    padding-top: 10px;
+}
+
+#next {
+    padding:8px;
+    width: 100%;
+    border: none;
+    /* background-color: rgba(0,139,139,0.7); */
+    background-color: var(--main-color);
+    border-radius: 4px;
+    font-size: 16px;
+    color: white;
+
+}
+
+#next:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
 }
