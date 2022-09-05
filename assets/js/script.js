@@ -77,6 +77,7 @@ questionIndex = 0;
 
 var askQuestions = function (i) {
     
+    nextBtnEl.setAttribute("style", "display:none;");
 
     i = questionIndex;
 
@@ -198,7 +199,8 @@ var displayScores = function (scores) {
 
     for (var i = 0; i < scores.length; i++) {
         var eachScore = document.createElement("li");
-        eachScore.innerHTML = scores[i].initials + " → " + scores[i].score;
+        var number = i+1;
+        eachScore.innerHTML = number + ". " + scores[i].initials + " → " + scores[i].score;
         highScoresEl.appendChild(eachScore);
     }
 
