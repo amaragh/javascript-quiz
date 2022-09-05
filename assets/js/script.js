@@ -28,6 +28,11 @@ var saveInitialsEl = document.querySelector(".save-initials")
 
 var submitScoreEl = document.querySelector(".submit-score");
 
+var displayScoresEl = document.querySelector(".display-scores");
+var highScoresEl = document.querySelector(".high-scores");
+
+var restartOrClearEl = document.querySelector(".restart-or-clear");
+
 var questions = [
     {
         question: "Which of the below methods performs an action for each element in an array?",
@@ -51,11 +56,12 @@ var questions = [
 var timeCounter = 60;
 
 var reduceTime = function () {
+    timerEl.textContent = "Time Left: " + timeCounter;
 
     var countdownInterval = setInterval(function () {
         if (timeCounter > 0) {
-            timerEl.textContent = "Time Left: " + timeCounter;
             timeCounter--;
+            timerEl.textContent = "Time Left: " + timeCounter;
         }
         else {
             clearInterval(countdownInterval);
@@ -67,12 +73,12 @@ var stopTimer = function () {
     clearInterval(countdownInterval);
 };
 
-
-var questionIndex = 0;
+questionIndex = 0;
 
 var askQuestions = function (i) {
 
-    var i = questionIndex;
+    i = questionIndex;
+
     while (i < questions.length) {
 
         var answer = questions[i].answer;
@@ -140,7 +146,6 @@ var endQuiz = function () {
     saveScoreEl.setAttribute("style", "display:'';");
     saveInitialsEl.setAttribute("data-score", newScore);
 
-
 };
 
 
@@ -149,9 +154,10 @@ var highScoreHandler = function (event) {
 
     var initials = document.querySelector("input[name='initials']").value;
     var currentScore = { "initials": initials, "score": saveInitialsEl.getAttribute("data-score") };
+    highScores = loadScores();
     highScores.push(currentScore)
-    console.log(highScores)
     saveScores();
+    displayScores();
 }
 
 submitScoreEl.addEventListener("submit", highScoreHandler);
@@ -160,19 +166,49 @@ var saveScores = function () {
     localStorage.setItem("highScores", JSON.stringify(highScores));
 };
 
-var loadScores = function() {
-    var highScores = localStorage.getItem("highScores");
+var loadScores = function () {
+    var savedHighScores = localStorage.getItem("highScores");
 
-    if (!highScores) {
-        return false;
+    if (!savedHighScores) {
+        savedHighScores = [];
+    } else {
+        savedHighScores = JSON.parse(savedHighScores);
+
     }
 
-    highScores = JSON.parse(highScores);
+    return savedHighScores
 };
 
-var deleteScores = function () {
-    localStorage.clear();
-};
+
+var displayScores = function (scores) {
+    saveScoreEl.setAttribute("style", "display:none;");
+
+    scores = loadScores();
+
+    for (var i = 0; i < scores.length; i++) {
+        var eachScore = document.createElement("li");
+        eachScore.innerHTML = scores[i].initials + " → " + scores[i].score;
+        highScoresEl.appendChild(eachScore);
+    }
+
+    displayScoresEl.setAttribute("style", "display:'';")
+}
+
+
+displayScoresEl.addEventListener("click", function (event) {
+    var targetEl = event.target;
+
+    if (targetEl.matches(".restart-btn")) {
+        // reloads the page so that quiz can be taken again
+        location.reload();
+    }
+
+    else if (targetEl.matches(".clear-btn")) {
+        localStorage.removeItem("highScores");
+        highScoresEl.setAttribute("style", "display:none;");
+    }
+})
+
 
 var startQuiz = function () {
     //  hide header
@@ -182,7 +218,6 @@ var startQuiz = function () {
     // once the quiz begins, start the timer
     timerEl.setAttribute("style", "display:'';")
     reduceTime();
-
     // iterate through the questions by calling the askQuestions function
     askQuestions();
 
