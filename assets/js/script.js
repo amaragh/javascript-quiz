@@ -63,20 +63,22 @@ var reduceTime = function () {
             timeCounter--;
             timerEl.textContent = "Time Left: " + timeCounter;
         }
+        else if (questionIndex === questions.length) {
+            clearInterval(countdownInterval);
+        }
         else {
             clearInterval(countdownInterval);
+            endQuiz();
         }
     }, 1000);
 }
 
-var stopTimer = function () {
-    clearInterval(countdownInterval);
-};
+
 
 questionIndex = 0;
 
 var askQuestions = function (i) {
-    
+
     nextBtnEl.setAttribute("style", "display:none;");
 
     i = questionIndex;
@@ -98,6 +100,7 @@ var askQuestions = function (i) {
             else {
                 choicesArray[x].setAttribute("data-correct", "no");
             }
+
         }
         return questionContainerEl;
     }
@@ -109,6 +112,12 @@ var responseHandler = function (event) {
     var targetEl = event.target;
 
     if (targetEl.matches(".choice")) {
+
+        targetEl.setAttribute("data-selected", "true");
+
+
+        choiceContainerEl.removeEventListener("click", responseHandler);
+
         console.log(targetEl);
 
         if (targetEl.getAttribute("data-correct") === "yes") {
@@ -118,11 +127,13 @@ var responseHandler = function (event) {
             targetEl.innerHTML = targetEl.textContent + "<span class=emoji>WRONG ❌</span>";
             timeCounter = timeCounter - 5;
         }
+
+
     }
 
     // introduce option to go to next question after an answer has been selected
     nextBtnEl.setAttribute("style", "display:'';")
-
+    targetEl.setAttribute("data-selected", "false");
 };
 
 choiceContainerEl.addEventListener("click", responseHandler);
@@ -135,6 +146,7 @@ nextBtnEl.addEventListener("click", function () {
         console.log("All questions have been exhausted");
         endQuiz();
     }
+    choiceContainerEl.addEventListener("click", responseHandler);
 });
 
 var highScores = [];
@@ -155,6 +167,7 @@ var highScoreHandler = function (event) {
     event.preventDefault();
 
     var initials = document.querySelector("input[name='initials']").value;
+
     if (!initials) {
         alert("Please enter your initials!");
         return false;
@@ -184,7 +197,7 @@ var loadScores = function () {
     }
 
     // sort scores from highest to lowest
-    savedHighScores = savedHighScores.sort(function(a, b) {
+    savedHighScores = savedHighScores.sort(function (a, b) {
         return b.score - a.score;
     })
 
@@ -199,7 +212,7 @@ var displayScores = function (scores) {
 
     for (var i = 0; i < scores.length; i++) {
         var eachScore = document.createElement("li");
-        var number = i+1;
+        var number = i + 1;
         eachScore.innerHTML = number + ". " + scores[i].initials + " → " + scores[i].score;
         highScoresEl.appendChild(eachScore);
     }

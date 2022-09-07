@@ -83,7 +83,7 @@ header h2 {
     padding: 7px;
 }
 
-.choice:hover {
+.choice:hover, .choice[data-selected="true"] {
     font-size: 120%;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -102,12 +102,10 @@ header h2 {
     padding: 8px;
     width: 100%;
     border: none;
-    /* background-color: rgba(0,139,139,0.7); */
     background-color: var(--main-color);
     border-radius: 4px;
     font-size: 16px;
     color: white;
-
 }
 
 #next:hover {
@@ -201,7 +199,6 @@ h3 {
 }
 
 
-
 .restart-btn, .clear-btn {
     width: 100%;
     padding: 6px;
@@ -214,3 +211,16 @@ h3 {
 .restart-btn:hover, .clear-btn:hover {
     font-weight: bold;
 }
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+
+@media screen and (max-width: 980px) {}
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+
+@media screen and (max-width: 768px) {}
+
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+
+@media screen and (max-width: 575px) {}
