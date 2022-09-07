@@ -92,6 +92,11 @@ var askQuestions = function (i) {
         choice3El.textContent = questions[i].choice3;
         choice4El.textContent = questions[i].choice4;
 
+        choice1El.setAttribute("data-selected", "false");
+        choice2El.setAttribute("data-selected", "false");
+        choice3El.setAttribute("data-selected", "false");
+        choice4El.setAttribute("data-selected", "false");
+
         for (var x = 0; x < choicesArray.length; x++) {
 
             if (choicesArray[x].textContent === answer) {
@@ -133,7 +138,7 @@ var responseHandler = function (event) {
 
     // introduce option to go to next question after an answer has been selected
     nextBtnEl.setAttribute("style", "display:'';")
-    targetEl.setAttribute("data-selected", "false");
+   
 };
 
 choiceContainerEl.addEventListener("click", responseHandler);
