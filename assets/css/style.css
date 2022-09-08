@@ -83,7 +83,8 @@ header h2 {
     padding: 7px;
 }
 
-.choice:hover, .choice[data-selected="true"] {
+.choice:hover,
+.choice[data-selected="true"] {
     font-size: 120%;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -192,14 +193,17 @@ h3 {
 }
 
 .restart {
-    padding-right: 5px;;
+    padding-right: 5px;
+    ;
 }
+
 .clear {
-   padding-left: 5px;
+    padding-left: 5px;
 }
 
 
-.restart-btn, .clear-btn {
+.restart-btn,
+.clear-btn {
     width: 100%;
     padding: 6px;
     background-color: var(--main-color);
@@ -208,7 +212,8 @@ h3 {
     font-size: 16px;
 }
 
-.restart-btn:hover, .clear-btn:hover {
+.restart-btn:hover,
+.clear-btn:hover {
     font-weight: bold;
 }
 
@@ -223,4 +228,39 @@ h3 {
 
 /* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
 
-@media screen and (max-width: 575px) {}
+@media screen and (max-width: 575px) {
+
+    .questions {
+        width: 90%;
+        padding: 20px 15px;
+    }
+
+    .question {
+        font-size: 20px;
+    }
+
+    .choice {
+        font-size: 16px;
+    }
+
+    .save-score {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .save-score h3 {
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .score {
+        font-size: 24px;
+        padding-bottom: 30px;
+    }
+
+    .submit-score {
+        justify-content: center;
+    }
+
+
+}
