@@ -33,6 +33,7 @@ var highScoresEl = document.querySelector(".high-scores");
 
 var restartOrClearEl = document.querySelector(".restart-or-clear");
 
+// array of questions to iterate through for the quiz
 var questions = [
     {
         question: "Which of the below methods performs an action for each element in an array?",
@@ -55,28 +56,25 @@ var questions = [
 
 var timeCounter = 60;
 
+// function to display and update the timer on the webpage
 var reduceTime = function () {
     timerEl.textContent = "Time Left: " + timeCounter;
 
     var countdownInterval = setInterval(function () {
-        if (timeCounter > 0) {
-            timeCounter--;
-            timerEl.textContent = "Time Left: " + timeCounter;
-        }
-        else if (questionIndex === questions.length) {
-            clearInterval(countdownInterval);
-        }
-        else {
+        timeCounter--;
+        timerEl.textContent = "Time Left: " + timeCounter;
+        // stop timer and end quiz if time=0 or questions have all been answered
+        if (timeCounter === 0 || questionIndex === questions.length) {
             clearInterval(countdownInterval);
             endQuiz();
         }
+
     }, 1000);
 }
 
-
-
 questionIndex = 0;
 
+// populate HTML qith each question
 var askQuestions = function (i) {
 
     nextBtnEl.setAttribute("style", "display:none;");
@@ -92,11 +90,13 @@ var askQuestions = function (i) {
         choice3El.textContent = questions[i].choice3;
         choice4El.textContent = questions[i].choice4;
 
+        // data-selected attribute is used in CSS to control styling when an answer is selected
         choice1El.setAttribute("data-selected", "false");
         choice2El.setAttribute("data-selected", "false");
         choice3El.setAttribute("data-selected", "false");
         choice4El.setAttribute("data-selected", "false");
 
+        // add attribute to indicate whether choice is correct or incorrect
         for (var x = 0; x < choicesArray.length; x++) {
 
             if (choicesArray[x].textContent === answer) {
@@ -105,26 +105,25 @@ var askQuestions = function (i) {
             else {
                 choicesArray[x].setAttribute("data-correct", "no");
             }
-
         }
         return questionContainerEl;
     }
 };
 
 
-
+// handler for a click event on a response to a question
 var responseHandler = function (event) {
     var targetEl = event.target;
 
     if (targetEl.matches(".choice")) {
 
+        // changes attribute so CSS styling will select this choice
         targetEl.setAttribute("data-selected", "true");
 
-
+        // disallows unselected responses from being clicked once an asnswer has been selected
         choiceContainerEl.removeEventListener("click", responseHandler);
 
-        console.log(targetEl);
-
+        // displays text next to selected answer which indicates whether correct or incorrect
         if (targetEl.getAttribute("data-correct") === "yes") {
             targetEl.innerHTML = targetEl.textContent + "<span class=emoji>CORRECT ✅</span>";
         }
@@ -132,18 +131,17 @@ var responseHandler = function (event) {
             targetEl.innerHTML = targetEl.textContent + "<span class=emoji>WRONG ❌</span>";
             timeCounter = timeCounter - 5;
         }
-
-
     }
 
     // introduce option to go to next question after an answer has been selected
     nextBtnEl.setAttribute("style", "display:'';")
-   
+
 };
 
 choiceContainerEl.addEventListener("click", responseHandler);
 
 nextBtnEl.addEventListener("click", function () {
+    // advance to next question when this button is clicked
     questionIndex++;
     askQuestions(questionIndex);
 
@@ -151,6 +149,7 @@ nextBtnEl.addEventListener("click", function () {
         console.log("All questions have been exhausted");
         endQuiz();
     }
+    // allow choices to respond to clicks agin once we advance to the next question
     choiceContainerEl.addEventListener("click", responseHandler);
 });
 
@@ -178,7 +177,9 @@ var highScoreHandler = function (event) {
         return false;
     }
 
+
     var currentScore = { "initials": initials, "score": saveInitialsEl.getAttribute("data-score") };
+    // retrieve existing high scores
     highScores = loadScores();
     highScores.push(currentScore)
     saveScores();
@@ -187,6 +188,7 @@ var highScoreHandler = function (event) {
 
 submitScoreEl.addEventListener("submit", highScoreHandler);
 
+// saves high scores to local storage
 var saveScores = function () {
     localStorage.setItem("highScores", JSON.stringify(highScores));
 };
@@ -196,6 +198,7 @@ var loadScores = function () {
     var savedHighScores = localStorage.getItem("highScores");
 
     if (!savedHighScores) {
+        // create an empty array if there are no existing high scores
         savedHighScores = [];
     } else {
         savedHighScores = JSON.parse(savedHighScores);
@@ -206,13 +209,14 @@ var loadScores = function () {
         return b.score - a.score;
     })
 
-    return savedHighScores
+    return savedHighScores;
 };
 
 
 var displayScores = function (scores) {
     saveScoreEl.setAttribute("style", "display:none;");
 
+    // load scores from local storage
     scores = loadScores();
 
     for (var i = 0; i < scores.length; i++) {
@@ -235,7 +239,9 @@ displayScoresEl.addEventListener("click", function (event) {
     }
 
     else if (targetEl.matches(".clear-btn")) {
+        // deletes all scores from local storage
         localStorage.removeItem("highScores");
+        // removes display of high scores from web page
         highScoresEl.setAttribute("style", "display:none;");
     }
 })
@@ -249,7 +255,7 @@ var startQuiz = function () {
     // once the quiz begins, start the timer
     timerEl.setAttribute("style", "display:'';")
     reduceTime();
-    // iterate through the questions by calling the askQuestions function
+    // display and then iterate through the questions by calling the askQuestions function
     questionContainerEl.setAttribute("style", "display:'';")
     askQuestions();
 
