@@ -201,7 +201,6 @@ h3 {
     padding-left: 5px;
 }
 
-
 .restart-btn,
 .clear-btn {
     width: 100%;
@@ -217,18 +216,28 @@ h3 {
     font-weight: bold;
 }
 
-/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
-
-@media screen and (max-width: 980px) {}
-
-/* MEDIA QUERY FOR TABLETS AND SMALLER */
-
-@media screen and (max-width: 768px) {}
-
-
 /* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
 
 @media screen and (max-width: 575px) {
+
+    header h1 {
+        font-size: 40px;
+        padding: 20px;
+    }
+    
+    header h2 {
+        font-size: 25px;
+        padding: 8px;
+    }
+
+    .startBtn {
+        margin-top: 80px;
+    }   
+    
+    #start {
+        font-size: 30px;
+        padding: 20px 40px;
+    }
 
     .questions {
         width: 90%;
@@ -262,5 +271,18 @@ h3 {
         justify-content: center;
     }
 
+    .restart-or-clear {
+        display:block;
+        flex-wrap: nowrap;
+    }
 
+    .restart {
+        padding-right: 0;
+       padding-bottom: 5px ;
+    }
+    
+    .clear {
+        padding-left: 0;
+    }
+   
 }
