@@ -50,6 +50,70 @@ var questions = [
         choice3: "var",
         choice4: "class",
         answer: "var"
+    },
+    {
+        question: "A Javascript array is an ordered list of what?",
+        choice1: "strings",
+        choice2: "objects",
+        choice3: "functions",
+        choice4: "values",
+        answer: "values"
+    },
+    {
+        question: "Which of the below can be used to call a JavaScipt code snippet?",
+        choice1: "variable",
+        choice2: "function/method",
+        choice3: "array",
+        choice4: "event",
+        answer: "function/method"
+    },
+    {
+        question: "Which of the below values is falsy?",
+        choice1: "0",
+        choice2: "null",
+        choice3: "''",
+        choice4: "All of the above",
+        answer: "All of the above"
+    },
+    {
+        question: "What does the Javascript “debugger” statement do?",
+        choice1: "Debugs all errors in the program at runtime",
+        choice2: "Debugs errors in the current statement, if any",
+        choice3: "Acts as a breakpoint in the program",
+        choice4: "All of the above",
+        answer: "Acts as a breakpoint in the program"
+    },
+    {
+        question: "Which function is used to serialize an object into a JSON string in Javascript?",
+        choice1: "stringify()",
+        choice2: "convert()",
+        choice3: "toUpperCase()",
+        choice4: "parse()",
+        answer: "stringify()"
+    },
+    {
+        question: "How is an interval timer stopped in JavaScript?",
+        choice1: "intervalClear",
+        choice2: "clearTimer",
+        choice3: "stopTimer",
+        choice4: "clearInterval",
+        answer: "clearInterval"
+    },
+    {
+        question: "What are 'function' and 'var' known as in JavaScript?",
+        choice1: "Data types",
+        choice2: "Declaration statements",
+        choice3: "Keywords",
+        choice4: "Deliverable statements",
+        answer: "Declaration statements"
+    },
+    {
+        question: "Which tag is an extension to HTML that can enclose multiple JavaScript statements?",
+        choice1: "head",
+        choice2: "body",
+        choice3: "script",
+        choice4: "head",
+        answer: "script"
     }
 ];
 
