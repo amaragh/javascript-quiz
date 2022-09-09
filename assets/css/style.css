@@ -66,7 +66,6 @@ header h2 {
     margin-left: auto;
     margin-right: auto;
     padding: 30px 50px;
-    /* border: black solid; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
 
@@ -125,7 +124,7 @@ header h2 {
     padding: 50px;
 }
 
-.save-score h3 {
+.save-score h3, .display-scores h3 {
     color: var(--main-color);
     font-size: 30px;
 }
