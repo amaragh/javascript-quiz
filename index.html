@@ -11,19 +11,21 @@
 
 <body>
 
+    <!-- start quiz page -->
     <header>
         <h1>JavaScript Timed Quiz</h1>
         <h2>Are you up for the challenge?</h2>
         <h2>Click the 'Start Quiz' button to begin!</h2>
-
     </header>
 
     <div class="startBtn">
         <button id="start">Start Quiz</button>
     </div>
 
+    <!-- element to store timer -->
     <div class="timer" style="display: none;"></div>
 
+    <!-- framework for questions when they are eventually displayed -->
     <div class="questions" style="display: none;">
         <h2 class="question"></h2>
         <ul class="choices">
@@ -38,6 +40,7 @@
         </div>
     </div>
 
+    <!-- form to collect user's score once quiz is complete -->
     <div class="save-score" style="display: none;">
         <h3>You completed the quiz!</h3>
         <div class="score"></div>
@@ -52,6 +55,7 @@
         </form>
     </div>
 
+    <!-- structure to display high scores and additonal options -->
     <div class="display-scores" style="display: none;">
         <h3>High Scores</h3>
         <ul class="high-scores">
@@ -65,7 +69,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="./assets/js/script.js"></script>
 </body>
