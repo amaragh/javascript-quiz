@@ -12,6 +12,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* START QUIZ PAGE STYLE */
 header {
     background-color: var(--main-color);
     display: block;
@@ -51,6 +52,7 @@ header h2 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+/* TIMER STYLE */
 .timer {
     text-align: center;
     padding: 50px;
@@ -58,6 +60,7 @@ header h2 {
     font-weight: bold;
 }
 
+/* QUESTIONS STYLE */
 .questions {
     width: 60%;
     margin-left: auto;
@@ -114,16 +117,12 @@ header h2 {
     font-weight: bold;
 }
 
+/* SAVE SCORES STYLE */
 .save-score {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
     padding: 50px;
-}
-
-h3 {
-    color: var(--main-color);
-    font-size: 30px;
 }
 
 .save-score h3 {
@@ -159,6 +158,7 @@ h3 {
     font-weight: bold;
 }
 
+/* HIGH SCORES PAGE STYLE */
 .display-scores {
     width: 60%;
     margin-left: auto;
@@ -175,7 +175,6 @@ h3 {
     background-color: #53bcbb;
     padding: 5px;
     padding-left: 10px;
-
 }
 
 .high-scores li:nth-child(even) {
@@ -194,7 +193,6 @@ h3 {
 
 .restart {
     padding-right: 5px;
-    ;
 }
 
 .clear {
